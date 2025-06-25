@@ -25,26 +25,21 @@ const imageFilenames = [
 const IMAGES_FOLDER = "hofimages";
 const slideshowContainer = document.querySelector('.slideshow');
 
-// Dynamically load all images into the slideshow
-imageFilenames.forEach((file, index) => {
-  const img = document.createElement("img");
-  img.src = `${IMAGES_FOLDER}/${file}`;
-  img.classList.add("slide");
-  if (index === 0) img.classList.add("active");
-  slideshowContainer.appendChild(img);
-});
-
-let current = 0;
-let slides;
-
-function showNextSlide() {
-  slides[current].classList.remove("active");
-  current = (current + 1) % slides.length;
-  slides[current].classList.add("active");
-}
-
-// Wait for images to fully load before starting slideshow
 window.onload = () => {
-  slides = document.querySelectorAll(".slide");
-  setInterval(showNextSlide, 4000);
+  imageFilenames.forEach((file, index) => {
+    const img = document.createElement("img");
+    img.src = `${IMAGES_FOLDER}/${file}`;
+    img.classList.add("slide");
+    if (index === 0) img.classList.add("active");
+    slideshowContainer.appendChild(img);
+  });
+
+  let current = 0;
+  const slides = document.querySelectorAll(".slide");
+
+  setInterval(() => {
+    slides[current].classList.remove("active");
+    current = (current + 1) % slides.length;
+    slides[current].classList.add("active");
+  }, 4000);
 };
