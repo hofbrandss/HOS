@@ -23,23 +23,24 @@ const imageFilenames = [
 ];
 
 const IMAGES_FOLDER = "hofimages";
-const slideshowContainer = document.querySelector('.slideshow');
 
-window.onload = () => {
+window.addEventListener('DOMContentLoaded', () => {
+  const slideshowContainer = document.querySelector('.slideshow');
+
   imageFilenames.forEach((file, index) => {
-    const img = document.createElement("img");
+    const img = document.createElement('img');
     img.src = `${IMAGES_FOLDER}/${file}`;
-    img.classList.add("slide");
-    if (index === 0) img.classList.add("active");
+    img.classList.add('slide');
+    if (index === 0) img.classList.add('active');
     slideshowContainer.appendChild(img);
   });
 
   let current = 0;
-  const slides = document.querySelectorAll(".slide");
+  const slides = document.querySelectorAll('.slide');
 
   setInterval(() => {
-    slides[current].classList.remove("active");
+    slides[current].classList.remove('active');
     current = (current + 1) % slides.length;
-    slides[current].classList.add("active");
+    slides[current].classList.add('active');
   }, 4000);
-};
+});
