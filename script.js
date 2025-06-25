@@ -24,25 +24,38 @@ const imageFilenames = [
 
 const IMAGES_FOLDER = "hofimages";
 
-window.onload = () => {
-  const slideshowContainer = document.querySelector('.slideshow');
-  let slides = [];
+window.addEventListener("DOMContentLoaded", () => {
+  const slideshowContainer = document.querySelector(".slideshow");
+
+  if (!slideshowContainer) {
+    console.error("❌ .slideshow container not found");
+    return;
+  }
 
   imageFilenames.forEach((file, index) => {
-    const img = document.createElement('img');
+    const img = document.createElement("img");
     img.src = `${IMAGES_FOLDER}/${file}`;
-    img.classList.add('slide');
-    if (index === 0) img.classList.add('active');
+    img.classList.add("slide");
+    if (index === 0) img.classList.add("active");
     slideshowContainer.appendChild(img);
-    slides.push(img);
   });
 
-  let current = 0;
+  // Delay until images are rendered
+  setTimeout(() => {
+    const slides = document.querySelectorAll(".slide");
+    if (slides.length === 0) {
+      console.error("❌ No slides found in DOM");
+      return;
+    }
 
-  setInterval(() => {
-    slides[current].classList.remove('active');
-    current = (current + 1) % slides.length;
-    slides[current].classList.add('active');
-  }, 4000);
-};
+    let current = 0;
+    console.log(`✅ Loaded ${slides.length} slides`);
+
+    setInterval(() => {
+      slides[current].classList.remove("active");
+      current = (current + 1) % slides.length;
+      slides[current].classList.add("active");
+    }, 4000);
+  }, 100); // delay to ensure all DOM elements exist
+});
 
