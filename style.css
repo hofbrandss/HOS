@@ -1,25 +1,36 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: sans-serif;
+  background-color: black;
+}
 
-  z-index: 1;
+.slideshow-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.slideshow-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Full image visible without cutting */
+  background-color: black;
+}
+
+.shop-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: white;
   color: black;
-  font-weight: bold;
-  font-size: 1.5em;
   padding: 1em 2em;
-  border-radius: 12px;
+  font-size: 1.5em;
   text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.shop-btn:hover {
-  background-color: black;
-  color: white;
-  border: 2px solid white;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .shop-btn {
-    font-size: 1.2em;
-    padding: 0.8em 1.5em;
-  }
+  border-radius: 8px;
+  font-weight: bold;
+  z-index: 2;
 }
