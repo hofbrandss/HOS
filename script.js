@@ -27,25 +27,27 @@ window.addEventListener('DOMContentLoaded', function () {
   const slideshow = document.getElementById("slideshow");
 
   function showImage(index) {
-    // Start blur-out
+    // Fade out current image
     slideshow.classList.remove("visible");
 
-    // Wait for fade out before changing image
+    // Wait for fade-out before updating src
     setTimeout(() => {
       slideshow.src = `hofimages/${imageFilenames[index]}`;
-    }, 400);
+    }, 300); // match transition timing
   }
 
-  // After image loads, blur in
-  slideshow.onload = function () {
+  // After new image loads, fade it in
+  slideshow.addEventListener("load", () => {
     slideshow.classList.add("visible");
-  };
+  });
 
+  // Cycle images
   function nextImage() {
     currentIndex = (currentIndex + 1) % imageFilenames.length;
     showImage(currentIndex);
   }
 
+  // First image
   showImage(currentIndex);
-  setInterval(nextImage, 4000); // 4 seconds per image
+  setInterval(nextImage, 4000);
 });
