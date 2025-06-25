@@ -1,7 +1,5 @@
 const imageFilenames = [
   "Album(Blackandwhite.jpg",
-  "_LOK1226.jpg",
-  "_LOK1255.jpg",
   "_LOK0702.jpg",
   "_LOK0727.jpg",
   "_LOK0728.jpg",
@@ -9,6 +7,8 @@ const imageFilenames = [
   "_LOK0752.jpg",
   "_LOK1035.jpg",
   "_LOK1118.jpg",
+  "_LOK1226.jpg",
+  "_LOK1255.jpg",
   "_LOK1260.jpg",
   "_LOK1266-2.jpg",
   "_LOK1274.jpg",
@@ -26,7 +26,6 @@ const IMAGES_FOLDER = "hofimages";
 
 window.onload = () => {
   const slideshowContainer = document.querySelector('.slideshow');
-
   let slides = [];
 
   imageFilenames.forEach((file, index) => {
