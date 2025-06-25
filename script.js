@@ -23,17 +23,23 @@ window.addEventListener('DOMContentLoaded', function () {
     "bornthiswayredesign.jpg"
   ];
 
-  const slideshow = document.getElementById("slideshow");
-  if (!slideshow) {
-    console.error("Missing #slideshow element.");
-    return;
-  }
-
   let currentIndex = 0;
+  const slideshow = document.getElementById("slideshow");
 
   function showImage(index) {
-    slideshow.src = `hofimages/${imageFilenames[index]}`;
+    // Start blur-out
+    slideshow.classList.remove("visible");
+
+    // Wait for fade out before changing image
+    setTimeout(() => {
+      slideshow.src = `hofimages/${imageFilenames[index]}`;
+    }, 400);
   }
+
+  // After image loads, blur in
+  slideshow.onload = function () {
+    slideshow.classList.add("visible");
+  };
 
   function nextImage() {
     currentIndex = (currentIndex + 1) % imageFilenames.length;
@@ -41,6 +47,5 @@ window.addEventListener('DOMContentLoaded', function () {
   }
 
   showImage(currentIndex);
-  setInterval(nextImage, 3000);
+  setInterval(nextImage, 4000); // 4 seconds per image
 });
-
