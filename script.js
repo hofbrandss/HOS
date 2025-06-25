@@ -25,7 +25,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
   const slideshow = document.getElementById("slideshow");
   if (!slideshow) {
-    console.error("❌ No element with ID 'slideshow' found in the DOM.");
+    console.error("Missing #slideshow element.");
     return;
   }
 
@@ -43,3 +43,4 @@ window.addEventListener('DOMContentLoaded', function () {
   showImage(currentIndex);
   setInterval(nextImage, 3000);
 });
+
