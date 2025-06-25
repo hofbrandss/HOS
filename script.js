@@ -1,59 +1,40 @@
 const imageFilenames = [
   "Album(Blackandwhite.jpg",
-  "_LOK0702.jpg",
-  "_LOK0727.jpg",
-  "_LOK0728.jpg",
-  "_LOK0731.jpg",
-  "_LOK0752.jpg",
-  "_LOK1035.jpg",
-  "_LOK1118.jpg",
-  "_LOK1226.jpg",
-  "_LOK1255.jpg",
-  "_LOK1260.jpg",
-  "_LOK1266-2.jpg",
-  "_LOK1274.jpg",
-  "_LOK1275.jpg",
-  "_LOK1294.jpg",
-  "_LOK1336.jpg",
-  "_LOK1348.jpg",
-  "_LOK1350.jpg",
-  "_LOK1371.jpg",
-  "_LOK1385.jpg",
-  "bornthiswayredsign.jpg"
+  "LOK0702.jpg",
+  "LOK0727.jpg",
+  "LOK0728.jpg",
+  "LOK0731.jpg",
+  "LOK0752.jpg",
+  "LOK1035.jpg",
+  "LOK1118.jpg",
+  "LOK1226.jpg",
+  "LOK1255.jpg",
+  "LOK1260.jpg",
+  "LOK1266-2.jpg",
+  "LOK1274.jpg",
+  "LOK1275.jpg",
+  "LOK1294.jpg",
+  "LOK1336.jpg",
+  "LOK1348.jpg",
+  "LOK1350.jpg",
+  "LOK1371.jpg",
+  "LOK1385.jpg",
+  "bornthiswayredesign.jpg"
 ];
 
-const IMAGES_FOLDER = "hofimages";
+let currentIndex = 0;
+const slideshow = document.getElementById("slideshow");
 
-window.addEventListener("DOMContentLoaded", () => {
-  const slideshowContainer = document.querySelector(".slideshow");
+function showImage(index) {
+  slideshow.src = `hofimages/${imageFilenames[index]}`;
+}
 
-  if (!slideshowContainer) {
-    console.error("❌ .slideshow container not found");
-    return;
-  }
+function nextImage() {
+  currentIndex = (currentIndex + 1) % imageFilenames.length;
+  showImage(currentIndex);
+}
 
-  imageFilenames.forEach((file, index) => {
-    const img = document.createElement("img");
-    img.src = `${IMAGES_FOLDER}/${file}`;
-    img.classList.add("slide");
-    if (index === 0) img.classList.add("active");
-    slideshowContainer.appendChild(img);
-  });
-
-  setTimeout(() => {
-    const slides = document.querySelectorAll(".slide");
-    if (slides.length === 0) {
-      console.error("❌ No slides found in DOM");
-      return;
-    }
-
-    let current = 0;
-    console.log(`✅ Loaded ${slides.length} slides`);
-
-    setInterval(() => {
-      slides[current].classList.remove("active");
-      current = (current + 1) % slides.length;
-      slides[current].classList.add("active");
-    }, 4000);
-  }, 100);
-});
+window.onload = function () {
+  showImage(currentIndex);
+  setInterval(nextImage, 3000); // Change every 3 seconds
+};
