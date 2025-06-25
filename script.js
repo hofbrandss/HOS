@@ -1,25 +1,25 @@
 const imageFilenames = [
-  "Album(Blackandwhite.JPG",
-  "_LOK0702.JPG",
-  "_LOK0727.JPG",
-  "_LOK0728.JPG",
-  "_LOK0731.JPG",
-  "_LOK0752.JPG",
-  "_LOK1035.JPG",
-  "_LOK1118.JPG",
-  "_LOK1226.JPG",
-  "_LOK1255.JPG",
-  "_LOK1260.JPG",
-  "_LOK1266-2.JPG",
-  "_LOK1274.JPG",
-  "_LOK1275.JPG",
-  "_LOK1294.JPG",
-  "_LOK1336.JPG",
-  "_LOK1348.JPG",
-  "_LOK1350.JPG",
-  "_LOK1371.JPG",
-  "_LOK1385.JPG",
-  "bornthiswayredsign.JPG"
+  "Album(Blackandwhite.jpg",
+  "_LOK0702.jpg",
+  "_LOK0727.jpg",
+  "_LOK0728.jpg",
+  "_LOK0731.jpg",
+  "_LOK0752.jpg",
+  "_LOK1035.jpg",
+  "_LOK1118.jpg",
+  "_LOK1226.jpg",
+  "_LOK1255.jpg",
+  "_LOK1260.jpg",
+  "_LOK1266-2.jpg",
+  "_LOK1274.jpg",
+  "_LOK1275.jpg",
+  "_LOK1294.jpg",
+  "_LOK1336.jpg",
+  "_LOK1348.jpg",
+  "_LOK1350.jpg",
+  "_LOK1371.jpg",
+  "_LOK1385.jpg",
+  "bornthiswayredsign.jpg"
 ];
 
 const IMAGES_FOLDER = "hofimages";
@@ -40,7 +40,6 @@ window.addEventListener("DOMContentLoaded", () => {
     slideshowContainer.appendChild(img);
   });
 
-  // Delay until images are rendered
   setTimeout(() => {
     const slides = document.querySelectorAll(".slide");
     if (slides.length === 0) {
@@ -58,4 +57,3 @@ window.addEventListener("DOMContentLoaded", () => {
     }, 4000);
   }, 100);
 });
-
