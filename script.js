@@ -45,3 +45,4 @@ window.onload = () => {
     slides[current].classList.add('active');
   }, 4000);
 };
+
