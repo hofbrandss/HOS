@@ -23,25 +23,29 @@ html, body {
 }
 
 .hero-bg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3);
+  object-fit: cover;
+  z-index: -1;
+}
+
+.hero-overlay {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  height: 100%;
+  width: 100%;
   padding: 1em;
 }
+
+
 
 .hos-logo {
   font-family: 'Rubik Burned', cursive;
