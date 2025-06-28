@@ -1,6 +1,4 @@
-
-
-/* RESET + BASE STYLES */
+/* RESET + BASE */
 * {
   margin: 0;
   padding: 0;
@@ -12,45 +10,61 @@ html, body {
   height: 100%;
   font-family: Arial, sans-serif;
   background-color: black;
-  overflow: hidden;
   color: white;
+  overflow: hidden;
 }
 
-/* ============ HOMEPAGE ============ */
-body.homepage {
-  background-color: white;
-  color: black;
+/* ================= HOMEPAGE HERO ================= */
+.home-hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-}
-
-.home-container {
   text-align: center;
+  padding: 1em;
 }
 
 .hos-logo {
+  font-family: 'Rubik Burned', cursive;
   font-size: 4em;
-  font-family: 'Rock Salt', cursive; /* graffiti-style */
-  letter-spacing: 4px;
+  color: white;
   margin-bottom: 1em;
+  letter-spacing: 4px;
 }
 
 .home-nav a {
   display: block;
   font-size: 1.5em;
-  color: black;
+  color: white;
   text-decoration: none;
-  margin: 0.6em 0;
+  margin: 0.5em 0;
   transition: 0.2s ease;
 }
 
 .home-nav a:hover {
-  color: gray;
+  color: #ccc;
 }
 
-/* ============ SLIDESHOW LANDING PAGE ============ */
+/* ================= SLIDESHOW ================= */
 .slideshow-container {
   position: relative;
   width: 100vw;
@@ -97,7 +111,7 @@ body.homepage {
   background-color: #f0f0f0;
 }
 
-/* ============ STORE PAGE ============ */
+/* ================= STORE PAGE ================= */
 body.white-bg {
   background-color: white;
   color: black;
@@ -141,7 +155,7 @@ body.white-bg {
   background-color: #eaeaea;
 }
 
-/* ============ PRODUCT PAGES ============ */
+/* ================= PRODUCT PAGE ================= */
 .product-card {
   background-color: white;
   color: black;
@@ -184,7 +198,7 @@ body.white-bg {
   background-color: #333;
 }
 
-/* ============ RESPONSIVE ============ */
+/* ================= RESPONSIVE ================= */
 @media (min-width: 600px) {
   .product-list {
     flex-direction: row;
@@ -199,6 +213,10 @@ body.white-bg {
 
   .hos-logo {
     font-size: 6em;
+  }
+
+  .home-nav a {
+    font-size: 2em;
   }
 
   .shop-button {
