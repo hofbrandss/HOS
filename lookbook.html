@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lookbook | HOS</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Distressed&family=Permanent+Marker&display=swap" rel="stylesheet">
   <style>
     body, html {
       margin: 0;
@@ -41,43 +41,52 @@
       flex-direction: column;
       align-items: center;
       margin-top: 100px;
+      padding: 1em;
     }
 
     .book {
       display: flex;
-      gap: 1em;
-      flex-wrap: nowrap;
-      overflow-x: scroll;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      width: 100vw;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      gap: 2em;
+      width: 100%;
+      padding: 1em 0;
     }
 
     .page {
-      scroll-snap-align: center;
       flex: 0 0 auto;
-      width: 45vw;
-      height: auto;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      width: 90vw;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       border: 1px solid #eee;
-      background-color: white;
+      padding: 1em;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     }
 
     .page img {
       width: 100%;
       height: auto;
       display: block;
-      object-fit: contain;
+      border-radius: 4px;
     }
 
-    @media (max-width: 768px) {
-      .book {
-        overflow-x: scroll;
-      }
+    .quote {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 1em;
+      text-align: center;
+      margin-top: 0.8em;
+      color: #333;
+    }
 
+    @media (min-width: 768px) {
+      .book {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
       .page {
-        width: 85vw;
+        margin: 0.5em;
       }
     }
   </style>
@@ -91,9 +100,7 @@
   </nav>
 
   <div class="lookbook-container">
-    <div class="book" id="book">
-      <!-- Pages inserted by JavaScript -->
-    </div>
+    <div class="book" id="book"></div>
   </div>
 
   <script>
@@ -117,15 +124,112 @@
       "LOK1385.jpg"
     ];
 
+    const quotes = [
+      "I am not lucky. I am blessed, born with purpose, built with pride.",
+      "Black is not a color. It’s a statement. – Unknown",
+      "To be African-American is to be African without memory and American without privilege. – James Baldwin",
+      "Born Caribbean, raised royal.",
+      "I am my ancestors' wildest dreams. – Unknown",
+      "Be yourself. Everyone else is already taken. – Oscar Wilde",
+      "There is no greater agony than bearing an untold story inside you. – Maya Angelou",
+      "Don’t touch my crown. – Solange",
+      "Your Blackness is your brilliance.",
+      "Mi skin cyan bleach, but mi culture nah fade.",
+      "From Kingston to Queens, we carry the fire.",
+      "Power lives in my melanin.",
+      "Caribbean blood, American dreams.",
+      "I wasn’t made to blend in. I was born this way.",
+      "Black joy is resistance.",
+      "We are rhythm. We are soul. We are legacy.",
+      "Being Black is a blessing, not a burden.",
+      "Rebellion is in our roots. Pride is in our DNA.",
+      "From the islands to the city, we move with purpose.",
+      "Di struggle bred mi strength.",
+      "Culture is not a costume, it’s my birthright.",
+      "Respect my roots and you’ll see my rise.",
+      "From the drum to the mic, our voices matter.",
+      "Every curl, every scar, every shade—divine.",
+      "We are not a monolith. We are a mosaic.",
+      "Born with rhythm. Living with reason.",
+      "My skin tells a story. My heart writes the next chapter.",
+      "We ain’t new to this, we’re true to this.",
+      "Caribbean heat. Harlem streets. One rhythm.",
+      "My accent ain’t broken. It’s inherited.",
+      "Di ting call pride—it deep like ocean.",
+      "Beauty isn’t in the mirror. It’s in the memory of where we come from.",
+      "I’m not made in America. I’m made of Africa, carried through the Caribbean.",
+      "Walk good. Speak loud. Live free.",
+      "Our roots are strong because our soil is rich.",
+      "To love yourself in a world that tells you not to is rebellion.",
+      "Caribbean sun, American struggle—Black excellence.",
+      "You can’t erase a rhythm that was born in drums.",
+      "From calypso to hip-hop—we write our own verses.",
+      "Black and Caribbean ain't extra—it’s essential.",
+      "I praise you because I am fearfully and wonderfully made. – Psalm 139:14",
+      "Before I formed you in the womb, I knew you. – Jeremiah 1:5",
+      "God does not look at the outward appearance, but the Lord looks at the heart. – 1 Samuel 16:7",
+      "You are God’s masterpiece. – Ephesians 2:10",
+      "The Spirit of God has made me, and the breath of the Almighty gives me life. – Job 33:4",
+      "For we walk by faith, not by sight. – 2 Corinthians 5:7",
+      "Let your light shine before others. – Matthew 5:16",
+      "Where the Spirit of the Lord is, there is freedom. – 2 Corinthians 3:17",
+      "You are the salt of the earth. – Matthew 5:13",
+      "If God is for us, who can be against us? – Romans 8:31",
+      "You shall love your neighbor as yourself. – Mark 12:31",
+      "I can do all things through Christ who strengthens me. – Philippians 4:13",
+      "You are a chosen people, a royal priesthood, a holy nation. – 1 Peter 2:9",
+      "Do not conform to the pattern of this world, but be transformed. – Romans 12:2",
+      "He has made everything beautiful in its time. – Ecclesiastes 3:11",
+      "Be strong and courageous. – Joshua 1:9",
+      "Blessed are the peacemakers. – Matthew 5:9",
+      "Man looks at the outward appearance, but the Lord looks at the heart. – 1 Samuel 16:7",
+      "I am with you always. – Matthew 28:20",
+      "Let all that you do be done in love. – 1 Corinthians 16:14",
+      "A crown of beauty instead of ashes. – Isaiah 61:3",
+      "The joy of the Lord is your strength. – Nehemiah 8:10",
+      "Even the hairs of your head are all numbered. – Luke 12:7",
+      "Do not despise small beginnings. – Zechariah 4:10",
+      "The Lord will fight for you. – Exodus 14:14",
+      "You are no longer a slave, but God’s child. – Galatians 4:7",
+      "In Christ there is neither Jew nor Gentile… for you are all one. – Galatians 3:28",
+      "Clothed in strength and dignity. – Proverbs 31:25",
+      "You will be called by a new name that the mouth of the Lord will bestow. – Isaiah 62:2",
+      "The Lord is my shepherd; I shall not want. – Psalm 23:1",
+      "Be still, and know that I am God. – Psalm 46:10",
+      "He brought me up out of the pit… and set my feet upon a rock. – Psalm 40:2",
+      "Those who hope in the Lord will renew their strength. – Isaiah 40:31",
+      "You are the light of the world. – Matthew 5:14",
+      "Fear not, for I am with you. – Isaiah 41:10",
+      "Your body is a temple of the Holy Spirit. – 1 Corinthians 6:19",
+      "My grace is sufficient for you. – 2 Corinthians 12:9",
+      "Create in me a clean heart, O God. – Psalm 51:10",
+      "Be kind and compassionate to one another. – Ephesians 4:32",
+      "He who began a good work in you will carry it on to completion. – Philippians 1:6",
+      "No weapon formed against you shall prosper. – Isaiah 54:17",
+      "You are more precious than rubies. – Proverbs 3:15",
+      "God is within her, she will not fall. – Psalm 46:5",
+      "He makes beauty from ashes. – Isaiah 61:3",
+      "Arise, shine, for your light has come. – Isaiah 60:1",
+      "Trust in the Lord with all your heart. – Proverbs 3:5"
+    ];
+
     const book = document.getElementById("book");
-    pages.forEach(filename => {
-      const div = document.createElement("div");
-      div.className = "page";
+
+    pages.forEach((filename, i) => {
+      const page = document.createElement("div");
+      page.className = "page";
+
       const img = document.createElement("img");
       img.src = `hofimages/${filename}`;
-      img.alt = filename;
-      div.appendChild(img);
-      book.appendChild(div);
+      img.alt = `Page ${i + 1}`;
+
+      const quote = document.createElement("p");
+      quote.className = "quote";
+      quote.textContent = `${i + 1}. ${quotes[i] || ''}`;
+
+      page.appendChild(img);
+      page.appendChild(quote);
+      book.appendChild(page);
     });
   </script>
 </body>
