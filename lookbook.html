@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lookbook | HOS</title>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik+Distressed&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HOS | Lookbook</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap" rel="stylesheet">
   <style>
-    body {
+    body, html {
       margin: 0;
+      padding: 0;
       font-family: 'Inter', sans-serif;
-      background-color: white;
-      color: black;
+      background: #fff;
+      overflow-x: hidden;
     }
 
     nav {
       position: fixed;
       top: 0;
       width: 100%;
-      background-color: white;
-      padding: 1em 0;
-      text-align: center;
-      font-family: 'Rubik Distressed', cursive;
+      background: white;
       z-index: 1000;
+      display: flex;
+      justify-content: center;
+      padding: 1em;
+      border-bottom: 1px solid #ccc;
+      font-family: 'Rubik Distressed', cursive;
     }
 
     nav a {
-      margin: 0 15px;
+      margin: 0 1em;
       text-decoration: none;
       color: black;
       font-size: 1.2em;
@@ -37,22 +40,25 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      margin-top: 100px;
+      margin-top: 80px;
+      padding: 2em;
+    }
+
+    .magazine-spread {
+      display: flex;
+      flex-direction: row;
+      gap: 0;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      transform-style: preserve-3d;
+      perspective: 1500px;
+      overflow: hidden;
     }
 
     .page {
-      display: flex;
-      justify-content: center;
-      gap: 1em;
-      max-width: 90vw;
-      flex-wrap: wrap;
-    }
-
-    .page img {
       width: 45vw;
-      max-width: 400px;
-      border: 2px solid black;
+      height: 60vh;
       object-fit: cover;
+      transition: transform 1s;
     }
 
     .nav-buttons {
@@ -60,14 +66,32 @@
     }
 
     .nav-buttons button {
-      font-size: 1.2em;
       padding: 0.5em 1em;
-      margin: 0 1em;
-      background-color: black;
+      font-size: 1em;
+      margin: 0 0.5em;
+      background: black;
       color: white;
       border: none;
       cursor: pointer;
-      font-family: 'Rubik Distressed', cursive;
+      border-radius: 5px;
+    }
+
+    @media (max-width: 768px) {
+      .magazine-spread {
+        flex-direction: row;
+        width: 100vw;
+        height: auto;
+        gap: 0;
+      }
+
+      .page {
+        width: 50vw;
+        height: 50vh;
+      }
+
+      .nav-buttons {
+        margin-top: 1.5em;
+      }
     }
   </style>
 </head>
@@ -75,81 +99,79 @@
   <nav>
     <a href="index.html">Home</a>
     <a href="store.html">Catalog</a>
-    <a href="#">Lookbook</a>
+    <a href="lookbook.html">Lookbook</a>
     <a href="#">Contact</a>
   </nav>
 
   <div class="lookbook-container">
-    <div class="page" id="lookbookPage">
-      <!-- Images will be inserted here -->
+    <div class="magazine-spread" id="spread">
+      <img src="hofimages/LOK0025.jpg" class="page" alt="Lookbook image">
+      <img src="hofimages/LOK0044.jpg" class="page" alt="Lookbook image">
     </div>
     <div class="nav-buttons">
-      <button onclick="prevPage()">⟵ Prev</button>
-      <button onclick="nextPage()">Next ⟶</button>
+      <button onclick="prevPage()">← Prev</button>
+      <button onclick="nextPage()">Next →</button>
     </div>
   </div>
 
   <script>
     const images = [
-      "hofimages/LOK0025.jpg", "hofimages/LOK0044.jpg", "hofimages/LOK0051.jpg", "hofimages/LOK0052.jpg",
-      "hofimages/LOK0056.jpg", "hofimages/LOK0058.jpg", "hofimages/LOK0070.jpg", "hofimages/LOK0079.jpg",
-      "hofimages/LOK0117.jpg", "hofimages/LOK0144.jpg", "hofimages/LOK0168.jpg", "hofimages/LOK0182.jpg",
-      "hofimages/LOK0223.jpg", "hofimages/LOK0224.jpg", "hofimages/LOK0240Mag.jpg", "hofimages/LOK0249.jpg",
-      "hofimages/LOK0250.jpg", "hofimages/LOK0251.jpg", "hofimages/LOK0257.jpg", "hofimages/LOK0259.jpg",
-      "hofimages/LOK0264.jpg", "hofimages/LOK0065.jpg", "hofimages/LOK0078.jpg", "hofimages/LOK0106.jpg",
-      "hofimages/LOK0107.jpg", "hofimages/LOK0132.jpg", "hofimages/LOK0136.jpg", "hofimages/LOK0140.jpg",
-      "hofimages/LOK0147.jpg", "hofimages/LOK0155.jpg", "hofimages/LOK0164.jpg", "hofimages/LOK0188.jpg",
-      "hofimages/LOK0198.jpg", "hofimages/LOK0206.jpg", "hofimages/LOK0213.jpg", "hofimages/LOK0225.jpg",
-      "hofimages/LOK0228.jpg", "hofimages/LOK0232.jpg", "hofimages/LOK0235.jpg", "hofimages/LOK0240.jpg",
-      "hofimages/LOK0248.jpg", "hofimages/LOK0253.jpg", "hofimages/LOK0256.jpg", "hofimages/LOK0261.jpg",
-      "hofimages/Album.jpg", "hofimages/AlbumBlackandwhite.jpg", "hofimages/bornthiswaydesign.jpg",
-      "hofimages/BornThisWaySign.jpg", "hofimages/LOK0702.jpg", "hofimages/LOK0727.jpg", "hofimages/LOK0728.jpg",
-      "hofimages/LOK0731.jpg", "hofimages/LOK0752.jpg", "hofimages/LOK1035.jpg", "hofimages/LOK1116.jpg",
-      "hofimages/LOK1118.jpg", "hofimages/LOK1120.jpg", "hofimages/LOK1122.jpg", "hofimages/LOK1126.jpg",
-      "hofimages/LOK1248.jpg", "hofimages/LOK1257.jpg", "hofimages/LOK1260.jpg", "hofimages/LOK1261.jpg",
-      "hofimages/LOK1265.jpg", "hofimages/LOK1266.jpg", "hofimages/LOK1267.jpg", "hofimages/LOK1271.jpg",
-      "hofimages/LOK1272.jpg", "hofimages/LOK1274.jpg", "hofimages/LOK1275.jpg", "hofimages/LOK1277.jpg",
-      "hofimages/LOK1286.jpg", "hofimages/LOK1290.jpg", "hofimages/LOK1294.jpg", "hofimages/LOK1324.jpg",
-      "hofimages/LOK1342.jpg", "hofimages/LOK1348.jpg", "hofimages/LOK1350.jpg", "hofimages/LOK1354.jpg",
-      "hofimages/LOK1364.jpg", "hofimages/LOK1371.jpg", "hofimages/LOK1373.jpg", "hofimages/LOK1376.jpg",
-      "hofimages/LOK1385.jpg"
+      "LOK0025.jpg", "LOK0044.jpg", "LOK0052.jpg", "LOK0056.jpg", "LOK0058.jpg",
+      "LOK0070.jpg", "LOK0079.jpg", "LOK0117.jpg", "LOK0144.jpg", "LOK0164.jpg",
+      "LOK0182.jpg", "LOK0223.jpg", "LOK0224.jpg", "LOK0240Mag.jpg", "LOK0248.jpg",
+      "LOK0250.jpg", "LOK0251.jpg", "LOK0257.jpg", "LOK0259.jpg", "LOK0264.jpg",
+      "LOK0265.jpg", "LOK0702.jpg", "LOK0727.jpg", "LOK0728.jpg", "LOK0731.jpg",
+      "LOK0752.jpg", "LOK1035.jpg", "LOK1118.jpg", "LOK1261.jpg", "LOK1373.jpg"
     ];
 
-    let currentPage = 0;
+    let currentIndex = 0;
+    const spread = document.getElementById('spread');
 
-    function renderPage() {
-      const container = document.getElementById('lookbookPage');
-      container.innerHTML = '';
-      const left = images[currentPage * 2];
-      const right = images[currentPage * 2 + 1];
-      if (left) container.innerHTML += `<img src="${left}" alt="">`;
-      if (right) container.innerHTML += `<img src="${right}" alt="">`;
+    function updateSpread() {
+      spread.innerHTML = '';
+      for (let i = 0; i < 2; i++) {
+        if (images[currentIndex + i]) {
+          const img = document.createElement('img');
+          img.src = `hofimages/${images[currentIndex + i]}`;
+          img.className = 'page';
+          spread.appendChild(img);
+        }
+      }
     }
 
     function nextPage() {
-      if ((currentPage + 1) * 2 < images.length) {
-        currentPage++;
-        renderPage();
+      if (currentIndex + 2 < images.length) {
+        currentIndex += 2;
+        updateSpread();
       }
     }
 
     function prevPage() {
-      if (currentPage > 0) {
-        currentPage--;
-        renderPage();
+      if (currentIndex - 2 >= 0) {
+        currentIndex -= 2;
+        updateSpread();
       }
     }
 
-    // Swipe support for mobile
-    let startX = 0;
-    document.addEventListener('touchstart', e => startX = e.touches[0].clientX);
-    document.addEventListener('touchend', e => {
-      const endX = e.changedTouches[0].clientX;
-      if (startX - endX > 50) nextPage();
-      else if (endX - startX > 50) prevPage();
-    });
+    spread.addEventListener('touchstart', handleTouchStart, false);
+    spread.addEventListener('touchmove', handleTouchMove, false);
 
-    renderPage();
+    let xStart = null;
+
+    function handleTouchStart(evt) {
+      xStart = evt.touches[0].clientX;
+    }
+
+    function handleTouchMove(evt) {
+      if (!xStart) return;
+      let xEnd = evt.touches[0].clientX;
+      let xDiff = xStart - xEnd;
+      if (xDiff > 10) nextPage();
+      else if (xDiff < -10) prevPage();
+      xStart = null;
+    }
+
+    updateSpread();
   </script>
 </body>
 </html>
