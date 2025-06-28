@@ -1,96 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HOS | Lookbook</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lookbook | HOS</title>
+  <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap" rel="stylesheet">
   <style>
     body, html {
       margin: 0;
       padding: 0;
+      background-color: white;
       font-family: 'Inter', sans-serif;
-      background: #fff;
       overflow-x: hidden;
     }
 
     nav {
       position: fixed;
       top: 0;
+      left: 0;
       width: 100%;
-      background: white;
-      z-index: 1000;
+      background-color: white;
+      z-index: 999;
+      padding: 1em;
       display: flex;
       justify-content: center;
-      padding: 1em;
-      border-bottom: 1px solid #ccc;
+      gap: 2em;
       font-family: 'Rubik Distressed', cursive;
+      font-size: 1.2em;
+      border-bottom: 1px solid #ccc;
     }
 
     nav a {
-      margin: 0 1em;
-      text-decoration: none;
       color: black;
-      font-size: 1.2em;
+      text-decoration: none;
     }
 
     .lookbook-container {
       display: flex;
-      justify-content: center;
-      align-items: center;
       flex-direction: column;
-      margin-top: 80px;
-      padding: 2em;
+      align-items: center;
+      margin-top: 100px;
     }
 
-    .magazine-spread {
+    .page-pair {
       display: flex;
-      flex-direction: row;
+      justify-content: center;
       gap: 0;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
-      transform-style: preserve-3d;
-      perspective: 1500px;
-      overflow: hidden;
+      margin: 1em 0;
+      max-width: 100%;
+      perspective: 1200px;
     }
 
     .page {
       width: 45vw;
-      height: 60vh;
-      object-fit: cover;
-      transition: transform 1s;
+      max-height: 90vh;
+      overflow: hidden;
+      border: 1px solid #eee;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      transform-style: preserve-3d;
+      transition: transform 0.8s ease-in-out;
     }
 
-    .nav-buttons {
-      margin-top: 2em;
+    .page.left-flip {
+      transform: rotateY(-15deg);
     }
 
-    .nav-buttons button {
-      padding: 0.5em 1em;
+    .page.right-flip {
+      transform: rotateY(15deg);
+    }
+
+    .page img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .navigation-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 2em;
+      margin: 1em 0;
+    }
+
+    .navigation-buttons button {
+      padding: 0.5em 1.2em;
       font-size: 1em;
-      margin: 0 0.5em;
-      background: black;
+      cursor: pointer;
+      background-color: black;
       color: white;
       border: none;
-      cursor: pointer;
       border-radius: 5px;
     }
 
     @media (max-width: 768px) {
-      .magazine-spread {
-        flex-direction: row;
-        width: 100vw;
-        height: auto;
-        gap: 0;
+      .page-pair {
+        flex-direction: column;
+        gap: 0.5em;
       }
 
       .page {
-        width: 50vw;
-        height: 50vh;
-      }
-
-      .nav-buttons {
-        margin-top: 1.5em;
+        width: 90vw;
       }
     }
   </style>
@@ -104,75 +114,65 @@
   </nav>
 
   <div class="lookbook-container">
-    <div class="magazine-spread" id="spread">
-      <img src="hofimages/LOK0025.jpg" class="page" alt="Lookbook image">
-      <img src="hofimages/LOK0044.jpg" class="page" alt="Lookbook image">
+    <div class="page-pair" id="pagePair">
+      <div class="page left-flip"><img src="hofimages/LOK0025.jpg" alt="Lookbook Page 1"></div>
+      <div class="page right-flip"><img src="hofimages/LOK0044.jpg" alt="Lookbook Page 2"></div>
     </div>
-    <div class="nav-buttons">
-      <button onclick="prevPage()">← Prev</button>
-      <button onclick="nextPage()">Next →</button>
+
+    <div class="navigation-buttons">
+      <button onclick="prevPage()">&#8592; Prev</button>
+      <button onclick="nextPage()">Next &#8594;</button>
     </div>
   </div>
 
   <script>
-    const images = [
-      "LOK0025.jpg", "LOK0044.jpg", "LOK0052.jpg", "LOK0056.jpg", "LOK0058.jpg",
-      "LOK0070.jpg", "LOK0079.jpg", "LOK0117.jpg", "LOK0144.jpg", "LOK0164.jpg",
-      "LOK0182.jpg", "LOK0223.jpg", "LOK0224.jpg", "LOK0240Mag.jpg", "LOK0248.jpg",
-      "LOK0250.jpg", "LOK0251.jpg", "LOK0257.jpg", "LOK0259.jpg", "LOK0264.jpg",
-      "LOK0265.jpg", "LOK0702.jpg", "LOK0727.jpg", "LOK0728.jpg", "LOK0731.jpg",
-      "LOK0752.jpg", "LOK1035.jpg", "LOK1118.jpg", "LOK1261.jpg", "LOK1373.jpg"
+    const pages = [
+      "LOK0025.jpg", "LOK0044.jpg", "LOK0051.jpg", "LOK0052.jpg", "LOK0056.jpg",
+      "LOK0058.jpg", "LOK0070.jpg", "LOK0079.jpg", "LOK0117.jpg", "LOK0144.jpg",
+      "LOK0168.jpg", "LOK0182.jpg", "LOK0223.jpg", "LOK0224.jpg", "LOK0240Mag.jpg",
+      "LOK0249.jpg", "LOK0250.jpg", "LOK0251.jpg", "LOK0257.jpg", "LOK0259.jpg",
+      "LOK0264.jpg", "LOK0655.jpg", "LOK0078.jpg", "LOK0106.jpg", "LOK0107.jpg",
+      "LOK0132.jpg", "LOK0136.jpg", "LOK0140.jpg", "LOK0147.jpg", "LOK0155.jpg",
+      "LOK0164.jpg", "LOK0188.jpg", "LOK0198.jpg", "LOK0206.jpg", "LOK0213.jpg",
+      "LOK0225.jpg", "LOK0228.jpg", "LOK0232.jpg", "LOK0235.jpg", "LOK0240.jpg",
+      "LOK0248.jpg", "LOK0253.jpg", "LOK0256.jpg", "LOK0261.jpg", "LOK0702.jpg",
+      "LOK0727.jpg", "LOK0728.jpg", "LOK0731.jpg", "LOK0752.jpg", "LOK1035.jpg",
+      "LOK1116.jpg", "LOK1118.jpg", "LOK1120.jpg", "LOK1122.jpg", "LOK1126.jpg",
+      "LOK1248.jpg", "LOK1257.jpg", "LOK1260.jpg", "LOK1226.jpg", "LOK1255.jpg",
+      "LOK1265.jpg", "LOK1266.jpg", "LOK1267.jpg", "LOK1271.jpg", "LOK1272.jpg",
+      "LOK1274.jpg", "LOK1275.jpg", "LOK1277.jpg", "LOK1286.jpg", "LOK1290.jpg",
+      "LOK1294.jpg", "LOK1324.jpg", "LOK1342.jpg", "LOK1348.jpg", "LOK1350.jpg",
+      "LOK1354.jpg", "LOK1364.jpg", "LOK1371.jpg", "LOK1373.jpg", "LOK1376.jpg",
+      "LOK1385.jpg"
     ];
 
-    let currentIndex = 0;
-    const spread = document.getElementById('spread');
+    let index = 0;
 
-    function updateSpread() {
-      spread.innerHTML = '';
-      for (let i = 0; i < 2; i++) {
-        if (images[currentIndex + i]) {
-          const img = document.createElement('img');
-          img.src = `hofimages/${images[currentIndex + i]}`;
-          img.className = 'page';
-          spread.appendChild(img);
-        }
-      }
+    function renderPages() {
+      const left = pages[index];
+      const right = pages[index + 1] || "";
+      const container = document.getElementById("pagePair");
+      container.innerHTML = `
+        <div class="page left-flip"><img src="hofimages/${left}" alt="Page"></div>
+        <div class="page right-flip"><img src="hofimages/${right}" alt="Page"></div>
+      `;
     }
 
     function nextPage() {
-      if (currentIndex + 2 < images.length) {
-        currentIndex += 2;
-        updateSpread();
+      if (index + 2 < pages.length) {
+        index += 2;
+        renderPages();
       }
     }
 
     function prevPage() {
-      if (currentIndex - 2 >= 0) {
-        currentIndex -= 2;
-        updateSpread();
+      if (index - 2 >= 0) {
+        index -= 2;
+        renderPages();
       }
     }
 
-    spread.addEventListener('touchstart', handleTouchStart, false);
-    spread.addEventListener('touchmove', handleTouchMove, false);
-
-    let xStart = null;
-
-    function handleTouchStart(evt) {
-      xStart = evt.touches[0].clientX;
-    }
-
-    function handleTouchMove(evt) {
-      if (!xStart) return;
-      let xEnd = evt.touches[0].clientX;
-      let xDiff = xStart - xEnd;
-      if (xDiff > 10) nextPage();
-      else if (xDiff < -10) prevPage();
-      xStart = null;
-    }
-
-    updateSpread();
+    renderPages();
   </script>
 </body>
 </html>
-
