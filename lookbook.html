@@ -43,31 +43,22 @@
       margin-top: 100px;
     }
 
-    .page-pair {
+    .book {
+      position: relative;
       display: flex;
-      justify-content: center;
+      perspective: 2000px;
       gap: 0;
-      margin: 1em 0;
-      max-width: 100%;
-      perspective: 1200px;
     }
 
     .page {
       width: 45vw;
-      max-height: 90vh;
-      overflow: hidden;
-      border: 1px solid #eee;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      height: auto;
       transform-style: preserve-3d;
-      transition: transform 0.8s ease-in-out;
-    }
-
-    .page.left-flip {
-      transform: rotateY(-15deg);
-    }
-
-    .page.right-flip {
-      transform: rotateY(15deg);
+      transform-origin: left;
+      transition: transform 1s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin: 0 0.5em;
+      border: 1px solid #eee;
     }
 
     .page img {
@@ -94,13 +85,14 @@
     }
 
     @media (max-width: 768px) {
-      .page-pair {
+      .book {
         flex-direction: column;
-        gap: 0.5em;
+        align-items: center;
       }
 
       .page {
         width: 90vw;
+        margin-bottom: 1em;
       }
     }
   </style>
@@ -114,9 +106,8 @@
   </nav>
 
   <div class="lookbook-container">
-    <div class="page-pair" id="pagePair">
-      <div class="page left-flip"><img src="hofimages/LOK0025.jpg" alt="Lookbook Page 1"></div>
-      <div class="page right-flip"><img src="hofimages/LOK0044.jpg" alt="Lookbook Page 2"></div>
+    <div class="book" id="book">
+      <!-- Pages inserted by JavaScript -->
     </div>
 
     <div class="navigation-buttons">
@@ -151,10 +142,10 @@
     function renderPages() {
       const left = pages[index];
       const right = pages[index + 1] || "";
-      const container = document.getElementById("pagePair");
-      container.innerHTML = `
-        <div class="page left-flip"><img src="hofimages/${left}" alt="Page"></div>
-        <div class="page right-flip"><img src="hofimages/${right}" alt="Page"></div>
+      const book = document.getElementById("book");
+      book.innerHTML = `
+        <div class="page" style="transform: rotateY(-10deg);"><img src="hofimages/${left}" alt="Page"></div>
+        <div class="page" style="transform: rotateY(10deg);"><img src="hofimages/${right}" alt="Page"></div>
       `;
     }
 
