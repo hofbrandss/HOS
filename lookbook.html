@@ -44,55 +44,40 @@
     }
 
     .book {
-      position: relative;
       display: flex;
-      perspective: 2000px;
-      gap: 0;
+      gap: 1em;
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      width: 100vw;
+      justify-content: center;
     }
 
     .page {
+      scroll-snap-align: center;
+      flex: 0 0 auto;
       width: 45vw;
       height: auto;
-      transform-style: preserve-3d;
-      transform-origin: left;
-      transition: transform 1s;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      margin: 0 0.5em;
       border: 1px solid #eee;
+      background-color: white;
     }
 
     .page img {
       width: 100%;
       height: auto;
       display: block;
-    }
-
-    .navigation-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 2em;
-      margin: 1em 0;
-    }
-
-    .navigation-buttons button {
-      padding: 0.5em 1.2em;
-      font-size: 1em;
-      cursor: pointer;
-      background-color: black;
-      color: white;
-      border: none;
-      border-radius: 5px;
+      object-fit: contain;
     }
 
     @media (max-width: 768px) {
       .book {
-        flex-direction: column;
-        align-items: center;
+        overflow-x: scroll;
       }
 
       .page {
-        width: 90vw;
-        margin-bottom: 1em;
+        width: 85vw;
       }
     }
   </style>
@@ -108,11 +93,6 @@
   <div class="lookbook-container">
     <div class="book" id="book">
       <!-- Pages inserted by JavaScript -->
-    </div>
-
-    <div class="navigation-buttons">
-      <button onclick="prevPage()">&#8592; Prev</button>
-      <button onclick="nextPage()">Next &#8594;</button>
     </div>
   </div>
 
@@ -137,33 +117,16 @@
       "LOK1385.jpg"
     ];
 
-    let index = 0;
-
-    function renderPages() {
-      const left = pages[index];
-      const right = pages[index + 1] || "";
-      const book = document.getElementById("book");
-      book.innerHTML = `
-        <div class="page" style="transform: rotateY(-10deg);"><img src="hofimages/${left}" alt="Page"></div>
-        <div class="page" style="transform: rotateY(10deg);"><img src="hofimages/${right}" alt="Page"></div>
-      `;
-    }
-
-    function nextPage() {
-      if (index + 2 < pages.length) {
-        index += 2;
-        renderPages();
-      }
-    }
-
-    function prevPage() {
-      if (index - 2 >= 0) {
-        index -= 2;
-        renderPages();
-      }
-    }
-
-    renderPages();
+    const book = document.getElementById("book");
+    pages.forEach(filename => {
+      const div = document.createElement("div");
+      div.className = "page";
+      const img = document.createElement("img");
+      img.src = `hofimages/${filename}`;
+      img.alt = filename;
+      div.appendChild(img);
+      book.appendChild(div);
+    });
   </script>
 </body>
 </html>
