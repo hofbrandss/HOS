@@ -8,21 +8,51 @@
 html, body {
   width: 100%;
   height: 100%;
-  font-family: Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
   background-color: black;
   color: white;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
-/* ================= HOMEPAGE HERO ================= */
-.home-hero {
+/* ============ FONTS ============ */
+.hos-logo {
+  font-family: 'Rubik Burned', cursive;
+  font-size: 3em;
+  text-align: center;
+  margin: 0.5em 0;
+}
+
+/* ============ NAVIGATION ============ */
+.home-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5em;
+  padding: 1em 0;
+  font-family: 'Rubik Distressed', cursive;
+  background-color: transparent;
+}
+
+.home-nav a {
+  color: black;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+.home-nav a:active,
+.home-nav a:focus {
+  outline: none;
+}
+
+/* ============ HOMEPAGE HERO ============ */
+.homepage .home-hero {
   position: relative;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
 }
 
-.hero-bg {
+.homepage .hero-bg {
   position: absolute;
   top: 0;
   left: 0;
@@ -32,141 +62,49 @@ html, body {
   z-index: -1;
 }
 
-.hero-overlay {
+.homepage .hero-overlay {
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
   height: 100%;
-  width: 100%;
   padding: 1em;
+  background: rgba(0, 0, 0, 0.3);
 }
 
-
-
-.hos-logo {
-  font-family: 'Rubik Burned', cursive;
-  font-size: 4em;
+.homepage .hos-logo {
   color: white;
-  margin-bottom: 1em;
-  letter-spacing: 4px;
 }
 
-.home-nav a {
-  display: block;
-  font-size: 1.5em;
-  color: white;
-  text-decoration: none;
-  margin: 0.5em 0;
-  transition: 0.2s ease;
-}
-
-.home-nav a:hover {
-  color: #ccc;
-}
-
-/* ================= SLIDESHOW ================= */
-.slideshow-container {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: black;
-  overflow: hidden;
-}
-
-.slideshow-container img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  transition: opacity 0.5s ease, filter 0.5s ease;
-  opacity: 0;
-  filter: blur(20px);
-  position: absolute;
-}
-
-.slideshow-container img.visible {
-  opacity: 1;
-  filter: blur(0);
-}
-
-.shop-button {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: white;
-  color: black;
-  padding: 1em 2em;
-  font-size: 1.2em;
-  font-weight: bold;
-  border-radius: 8px;
-  text-decoration: none;
-  z-index: 2;
-  transition: background-color 0.3s ease;
-}
-
-.shop-button:hover {
-  background-color: #f0f0f0;
-}
-
-/* ================= STORE PAGE ================= */
+/* ============ STORE PAGE ============ */
 body.white-bg {
   background-color: white;
   color: black;
-  overflow-y: auto;
 }
 
 .store-header {
   text-align: center;
+  padding: 1em 1em 0 1em;
   background-color: white;
-  color: black;
-  padding: 1.5em 1em;
-}
-
-.store-header h1 {
-  font-size: 1.8em;
 }
 
 .product-list {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 3em;
   padding: 2em 1em;
-  gap: 2em;
 }
 
-.product-link {
-  font-size: 1.5em;
-  text-decoration: none;
-  color: black;
-  background-color: #f5f5f5;
-  padding: 1em 2em;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: 0.2s ease;
-  width: 90%;
-  text-align: center;
-  max-width: 400px;
-}
-
-.product-link:hover {
-  background-color: #eaeaea;
-}
-
-/* ================= PRODUCT PAGE ================= */
+/* ============ PRODUCT CARDS ============ */
 .product-card {
   background-color: white;
   color: black;
-  max-width: 600px;
-  margin: 2em auto;
-  padding: 1.5em;
+  max-width: 500px;
   text-align: center;
+  padding: 1em;
 }
 
 .product-card img {
@@ -177,79 +115,41 @@ body.white-bg {
 }
 
 .product-card h2 {
-  font-size: 1.5em;
+  font-size: 1.4em;
   margin-bottom: 0.5em;
-}
-
-.product-card p {
-  font-size: 1.1em;
-  margin-bottom: 1.2em;
 }
 
 .buy-button {
   background-color: black;
   color: white;
-  border: none;
-  padding: 0.8em 1.6em;
-  border-radius: 6px;
-  font-weight: bold;
+  padding: 0.8em 1.5em;
   font-size: 1em;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
-  transition: 0.3s ease;
 }
 
 .buy-button:hover {
   background-color: #333;
 }
 
-/* ================= RESPONSIVE ================= */
+/* ============ RESPONSIVE ============ */
 @media (min-width: 600px) {
+  .home-nav a {
+    font-size: 1.5em;
+  }
+
+  .hos-logo {
+    font-size: 4em;
+  }
+
   .product-list {
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
   }
 
-  .product-link {
-    flex: 1 1 30%;
-    margin: 1em;
-  }
-
-  .hos-logo {
-    font-size: 6em;
-  }
-
-  .home-nav a {
-    font-size: 2em;
-  }
-
-  .shop-button {
-    font-size: 1.3em;
-
-/* NAVIGATION BAR */
-.home-nav {
-  display: flex;
-  justify-content: center;
-  gap: 2em;
-  margin-top: 1em;
-  flex-wrap: wrap;
-}
-
-.home-nav a {
-  font-family: 'Rubik Distressed', cursive;
-  font-size: 1.2em;
-  color: black;
-  text-decoration: none;
-  padding: 0.5em 1em;
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.home-nav a:hover {
-  color: #555;
-  transform: scale(1.05);
-}
-
-    padding: 1em 2.5em;
-    bottom: 50px;
+  .product-card {
+    width: 300px;
   }
 }
