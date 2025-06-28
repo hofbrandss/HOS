@@ -1,25 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>HOS | Home</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik+Burned&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Burned&family=Rubik+Distressed&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .home-hero {
+      position: relative;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+    }
+
+    .slideshow-container {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease;
+      z-index: -1;
+    }
+
+    .hero-bg.active {
+      opacity: 1;
+    }
+
+    .hero-overlay {
+      position: relative;
+      z-index: 10;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 1em;
+    }
+
+    .hos-logo {
+      font-family: 'Rubik Burned', cursive;
+      color: white;
+      font-size: 4em;
+      margin-bottom: 1em;
+    }
+
+    .home-nav {
+      display: flex;
+      gap: 1.5em;
+      flex-wrap: wrap;
+      justify-content: center;
+      font-family: 'Rubik Distressed', cursive;
+    }
+
+    .home-nav a {
+      font-size: 1.2em;
+      color: white;
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .hos-logo {
+        font-size: 2.5em;
+      }
+
+      .home-nav a {
+        font-size: 1em;
+      }
+    }
+  </style>
 </head>
 <body class="homepage">
   <div class="home-hero">
-    <img src="hofimages/AlbumBlackandwhite.jpg" alt="HOS Cover" class="hero-bg"/>
+    <div class="slideshow-container">
+      <img class="hero-bg active" src="hofimages/AlbumBlackandwhite.jpg" alt="Slide 1">
+      <img class="hero-bg" src="hofimages/LOK0257.jpg" alt="Slide 2">
+      <img class="hero-bg" src="hofimages/LOK0228.jpg" alt="Slide 3">
+      <img class="hero-bg" src="hofimages/LOK0164.jpg" alt="Slide 4">
+      <img class="hero-bg" src="hofimages/LOK0702.jpg" alt="Slide 5">
+      <img class="hero-bg" src="hofimages/LOK0711.jpg" alt="Slide 6">
+      <img class="hero-bg" src="hofimages/LOK0732.jpg" alt="Slide 7">
+    </div>
+
     <div class="hero-overlay">
       <h1 class="hos-logo">HOS</h1>
       <nav class="home-nav">
-  <a href="index.html">Home</a>
-  <a href="store.html">Catalog</a>
-  <a href="#">Lookbook</a>
-  <a href="#">Contact</a>
-</nav>
+        <a href="store.html">Catalog</a>
+        <a href="#">Lookbook</a>
+        <a href="#">Contact</a>
+      </nav>
     </div>
   </div>
+
+  <script>
+    let slides = document.querySelectorAll(".hero-bg");
+    let currentSlide = 0;
+
+    function showNextSlide() {
+      slides[currentSlide].classList.remove("active");
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add("active");
+    }
+
+    setInterval(showNextSlide, 4000);
+  </script>
 </body>
 </html>
