@@ -1,12 +1,20 @@
-html, body {
+/* RESET + BASE STYLES */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
   height: 100%;
+  width: 100%;
   background-color: black;
   font-family: Arial, sans-serif;
   overflow: hidden;
+  color: white;
 }
 
+/* SLIDESHOW PAGE STYLES */
 .slideshow-container {
   position: relative;
   width: 100vw;
@@ -41,9 +49,9 @@ html, body {
   color: black;
   padding: 1em 2em;
   font-size: 1.2em;
-  text-decoration: none;
-  border-radius: 8px;
   font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
   z-index: 2;
   transition: background-color 0.3s ease;
 }
@@ -52,11 +60,95 @@ html, body {
   background-color: #f0f0f0;
 }
 
-/* Mobile styling */
-@media (max-width: 600px) {
+/* STORE PAGE STYLES */
+.store-header {
+  text-align: center;
+  background-color: black;
+  color: white;
+  padding: 1.5em 1em;
+  position: relative;
+}
+
+.store-header .back-home {
+  position: absolute;
+  left: 1em;
+  top: 1.2em;
+  color: white;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+.store-header h1 {
+  font-size: 1.8em;
+  margin: 0;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5em;
+  padding: 1.5em;
+  overflow-y: auto;
+  max-height: calc(100vh - 80px);
+}
+
+.product-card {
+  background-color: #111;
+  color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: center;
+  padding: 1em;
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.product-card h2 {
+  font-size: 1.1em;
+  margin: 0.5em 0 0.2em;
+}
+
+.product-card p {
+  font-size: 1em;
+  margin-bottom: 0.8em;
+}
+
+.buy-button {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 0.6em 1.2em;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.buy-button:hover {
+  background-color: #f0f0f0;
+}
+
+/* RESPONSIVE STYLES */
+@media (min-width: 600px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .shop-button {
-    font-size: 1em;
-    padding: 0.8em 1.5em;
-    bottom: 20px;
+    font-size: 1.3em;
+    padding: 1em 2.5em;
+    bottom: 50px;
+  }
+
+  .product-card h2 {
+    font-size: 1.3em;
+  }
+
+  .product-card p {
+    font-size: 1.1em;
   }
 }
