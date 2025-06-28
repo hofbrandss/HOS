@@ -4,21 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>HOS | Home</title>
-  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Rubik+Burned&family=Rubik+Distressed&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body, html {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
       height: 100%;
       font-family: 'Inter', sans-serif;
+      background: black;
+      overflow: hidden;
     }
 
     .home-hero {
       position: relative;
       height: 100vh;
       width: 100vw;
-      overflow: hidden;
     }
 
     .slideshow-container {
@@ -27,18 +31,16 @@
       position: absolute;
       top: 0;
       left: 0;
+      z-index: 1;
     }
 
     .hero-bg {
       position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       opacity: 0;
-      transition: opacity 1s ease;
-      z-index: -1;
+      transition: opacity 1s ease-in-out;
     }
 
     .hero-bg.active {
@@ -46,16 +48,18 @@
     }
 
     .hero-overlay {
-      position: relative;
-      z-index: 10;
-      height: 100%;
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left: 0;
       width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      background-color: rgba(0, 0, 0, 0.3);
       padding: 1em;
     }
 
@@ -68,10 +72,10 @@
 
     .home-nav {
       display: flex;
-      gap: 1.5em;
+      gap: 2em;
+      font-family: 'Rubik Distressed', cursive;
       flex-wrap: wrap;
       justify-content: center;
-      font-family: 'Rubik Distressed', cursive;
     }
 
     .home-nav a {
@@ -91,10 +95,10 @@
     }
   </style>
 </head>
-<body class="homepage">
+<body>
   <div class="home-hero">
     <div class="slideshow-container">
-      <img class="hero-bg active" src="hofimages/Album-Blackandwhite.jpg" alt="Slide 1">
+      <img class="hero-bg active" src="hofimages/AlbumBlackandwhite.jpg" alt="Slide 1">
       <img class="hero-bg" src="hofimages/LOK0702.jpg" alt="Slide 2">
       <img class="hero-bg" src="hofimages/LOK0727.jpg" alt="Slide 3">
       <img class="hero-bg" src="hofimages/LOK0728.jpg" alt="Slide 4">
@@ -116,7 +120,7 @@
   </div>
 
   <script>
-    let slides = document.querySelectorAll(".hero-bg");
+    const slides = document.querySelectorAll(".hero-bg");
     let currentSlide = 0;
 
     function showNextSlide() {
@@ -129,4 +133,3 @@
   </script>
 </body>
 </html>
-
