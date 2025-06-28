@@ -23,31 +23,37 @@ window.addEventListener('DOMContentLoaded', function () {
     "bornthiswayredesign.jpg"
   ];
 
-  let currentIndex = 0;
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const slideshow = document.getElementById("slideshow");
+  let currentIndex = 0;
+
+  // Adjust timing for mobile (slightly slower)
+  const slideDelay = isMobile ? 5000 : 4000;
 
   function showImage(index) {
-    // Fade out current image
     slideshow.classList.remove("visible");
 
-    // Wait for fade-out before updating src
+    // Wait for fade out, then switch image
     setTimeout(() => {
       slideshow.src = `hofimages/${imageFilenames[index]}`;
-    }, 300); // match transition timing
+    }, 300);
   }
 
-  // After new image loads, fade it in
+  // When new image loads, fade it in
   slideshow.addEventListener("load", () => {
     slideshow.classList.add("visible");
   });
 
-  // Cycle images
   function nextImage() {
     currentIndex = (currentIndex + 1) % imageFilenames.length;
     showImage(currentIndex);
   }
 
-  // First image
+  // Initial load
   showImage(currentIndex);
-  setInterval(nextImage, 4000);
+  setInterval(nextImage, slideDelay);
+
+  // Touch swipe placeholder (can activate later)
+  // If you want swipe left/right to change images
+  // document.addEventListener("touchstart", handleSwipeStart);
 });
