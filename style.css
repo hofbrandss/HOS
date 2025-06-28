@@ -22,15 +22,21 @@ html, body {
   margin: 0.5em 0;
 }
 
-/* ============ NAVIGATION ============ */
+/* NAVIGATION FIXED TOP */
 .home-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: white;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 1.5em;
   padding: 1em 0;
   font-family: 'Rubik Distressed', cursive;
-  background-color: transparent;
+  border-bottom: 1px solid #ddd;
 }
 
 .home-nav a {
@@ -39,10 +45,10 @@ html, body {
   font-size: 1.2em;
 }
 
-.home-nav a:active,
-.home-nav a:focus {
-  outline: none;
+body {
+  padding-top: 80px; /* to prevent overlap from fixed nav */
 }
+
 
 /* ============ HOMEPAGE HERO ============ */
 .homepage .home-hero {
